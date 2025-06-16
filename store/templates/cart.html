@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Your Cart</h3>
+  <div class="row">
+    {% for item in cart_items %}
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ item.product.name }}</h5>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p class="fw-bold">Subtotal: ₹{{ item.total_price }}</p>
+
+            <form method="POST" action="{% url 'remove_from_cart' item.product.id %}">
+               {% csrf_token %}
+               <button class="btn btn-danger btn-sm mt-2">Remove</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <hr>
+  <h4>Total: ₹{{ total }}</h4>
+  <a href="#" class="btn btn-success mt-2">Proceed to Buy</a>
+</div>
+{% endblock %}

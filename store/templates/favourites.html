@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Favourites{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>❤️ Your Favourite Items</h2>
+    <div class="row">
+        {% for item in fav_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}" style="height: 300px; object-fit: contain;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text">{{ item.product.description|truncatechars:60 }}</p>
+                    <p class="text-success fw-bold">₹{{ item.product.price }}</p>
+                    <a href="{% url 'product_detail' item.product.id %}" class="btn btn-primary w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No favourite items yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

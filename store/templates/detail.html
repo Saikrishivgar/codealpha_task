@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ product.name }} Details</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-5 text-center">
+            <img src="{{ product.image.url }}" class="img-fluid" style="max-height: 400px;" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-7">
+            <h3>{{ product.name }}</h3>
+            <p class="text-muted">{{ product.description }}</p>
+            <h5 class="text-danger">Price: ₹{{ product.price }}</h5>
+            <p>Status:
+                <span class="badge bg-danger">Out of Stock</span>
+            </p>
+            <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-danger">
+                ❤️ Add to Favourites
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

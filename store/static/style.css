@@ -1,0 +1,9 @@
+/* Add to your CSS */
+body {
+  margin: 0;
+  padding: 0;
+}
+nav.navbar {
+  margin-bottom: 0;
+  border: none;
+}
